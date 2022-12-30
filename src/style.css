@@ -1,9 +1,8 @@
-
-@font-face {  
+@font-face {
   font-family: "CirrusCumulus";
   src: local("CirrusCumulus"),
-  url(./asset/fonts/CirrusCumulus.otf) format("truetype");
-};
+    url(./asset/fonts/CirrusCumulus.otf) format("truetype");
+}
 
 :root {
   font-family: Arial, Helvetica, sans-serif;
@@ -27,53 +26,25 @@
 }
 
 a {
-  color:inherit;
-  ;
+  color: inherit;
   text-decoration: inherit;
 }
 
-body {
+a:hover {
+  color: #64ff86
+}
+
+ body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
-}
-
-
-
-h1 {
-  color:rgb(237, 240, 243);
-  font-family: 'CirrusCumulus';
-  font-size: 7em;
-  line-height: 1.1;
-}
-
-
-button {
-  color: inherit;
-  border: transparent;
-  font-size: 1.2em;
-  font-family: Open Sans;
-  background-color: transparent;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-
-button:hover {
-  border-color: #64ff86;
-}
-
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+} 
 
 #app {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
+
 }
 
 @media (prefers-color-scheme: light) {
@@ -81,13 +52,9 @@ button:focus-visible {
     background-size: cover;
     background-color: rgb(227, 217, 221);
     background: linear-gradient(
-    185deg,
-    rgba(227, 217, 221, 1) 0%,
-    rgba(212, 232, 255, 1) 100%
-  );
+      185deg,
+      rgba(227, 217, 221, 1) 0%,
+      rgba(212, 232, 255, 1) 100%
+    );
   }
-  /* a:hover {
-    color: #747bff;
-  }
-  */
 }
