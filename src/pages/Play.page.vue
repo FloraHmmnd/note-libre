@@ -3,7 +3,12 @@
     <router-link to="/home">Note Libre</router-link>
   </button>
   <h1>Play</h1>
+  <UserControls></UserControls>
 </template>
+
+<script setup>
+import UserControls from "../components/UserControls.vue";
+</script>
 
 <style scoped>
 h1 {
