@@ -54,8 +54,10 @@ const selectedTempo = ref("largo");
 
 watch(
   () => minOctaveSelected.value,
-  () => {
-    maxOctaveSelected.value = minOctaveSelected.value;
+  (newValue) => {
+    if (newValue >= maxOctaveSelected.value) {
+      maxOctaveSelected.value = minOctaveSelected.value;
+    }
   }
 );
 </script>
