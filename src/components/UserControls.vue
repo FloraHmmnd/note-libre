@@ -38,19 +38,49 @@
     </select>
   </div>
   <button @click="handleAction()">GO</button>
+  <div>
+    <span>{{ note.name }}</span>
+    <span v-if="note.type">{{ note.type }}</span>
+    <span>{{ octave }}</span>
+  </div>
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { ref, watch, computed, toRefs } from "vue";
 import { TEMPOS } from "../constants/tempos.constants";
+import useRandomize from "../composables/useRandomize.composables";
 
-const handleAction = () => console.log("action");
+const handleAction = () => {
+  display();
+};
 
 const numberOfNotesSelected = ref(25);
-
 const minOctaveSelected = ref(1);
 const maxOctaveSelected = ref(1);
 const selectedTempo = ref("largo");
+const { randomNote, randomOctave, getTempo, randomizeTime } = useRandomize(
+  maxOctaveSelected,
+  minOctaveSelected,
+  numberOfNotesSelected,
+  selectedTempo
+);
+const note = ref("");
+const octave = ref("");
+const display = async () => {
+  for (let i = 0; i < numberOfNotesSelected.value; i++) {
+    await new Promise((response) => {
+      setTimeout(
+        response,
+        randomizeTime(
+          1000 / getTempo.value.timeDivider,
+          5000 / getTempo.value.timeDivider
+        )
+      );
+      note.value = randomNote();
+      octave.value = randomOctave();
+    });
+  }
+};
 
 watch(
   () => minOctaveSelected.value,
