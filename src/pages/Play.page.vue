@@ -4,10 +4,12 @@
   </button>
   <h1>Play</h1>
   <UserControls></UserControls>
+  <Score></Score>
 </template>
 
 <script setup>
 import UserControls from "../components/UserControls.vue";
+import Score from "../components/Score.vue";
 </script>
 
 <style scoped>

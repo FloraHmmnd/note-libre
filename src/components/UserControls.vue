@@ -29,6 +29,7 @@
       v-model="maxOctaveSelected"
     />
   </div>
+
   <div>
     <label for="choiceTempo">Select a tempo</label>
     <select id="choiceTempo" v-model="selectedTempo">
@@ -38,50 +39,27 @@
     </select>
   </div>
   <button @click="handleAction()">GO</button>
-  <div>
-    <span>{{ note.name }}</span>
-    <span v-if="note.type">{{ note.type }}</span>
-    <span>{{ octave }}</span>
-  </div>
 </template>
 
 <script setup>
-import { ref, watch, computed, toRefs } from "vue";
+import { watch } from "vue";
+import { storeToRefs } from "pinia";
+
+import useScoreStore from "../store/score.store";
 import { TEMPOS } from "../constants/tempos.constants";
-import useRandomize from "../composables/useRandomize.composables";
+import useScoreGenerator from "../composables/useScoreGenerator.composables";
 
-const handleAction = () => {
-  display();
-};
-
-const numberOfNotesSelected = ref(25);
-const minOctaveSelected = ref(1);
-const maxOctaveSelected = ref(1);
-const selectedTempo = ref("largo");
-const { randomNote, randomOctave, getTempo, randomizeTime } = useRandomize(
-  maxOctaveSelected,
-  minOctaveSelected,
+const {
   numberOfNotesSelected,
-  selectedTempo
-);
-const note = ref("");
-const octave = ref("");
-const display = async () => {
-  for (let i = 0; i < numberOfNotesSelected.value; i++) {
-    await new Promise((response) => {
-      setTimeout(
-        response,
-        randomizeTime(
-          1000 / getTempo.value.timeDivider,
-          5000 / getTempo.value.timeDivider
-        )
-      );
-      note.value = randomNote();
-      octave.value = randomOctave();
-    });
-  }
-};
+  minOctaveSelected,
+  maxOctaveSelected,
+  selectedTempo,
+} = storeToRefs(useScoreStore());
 
+const { player } = useScoreGenerator();
+const handleAction = () => {
+  player();
+};
 watch(
   () => minOctaveSelected.value,
   (newValue) => {
