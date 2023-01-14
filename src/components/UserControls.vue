@@ -29,6 +29,7 @@
       v-model="maxOctaveSelected"
     />
   </div>
+
   <div>
     <label for="choiceTempo">Select a tempo</label>
     <select id="choiceTempo" v-model="selectedTempo">
@@ -41,21 +42,30 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { watch } from "vue";
+import { storeToRefs } from "pinia";
+
+import useScoreStore from "../store/score.store";
 import { TEMPOS } from "../constants/tempos.constants";
+import useScoreGenerator from "../composables/useScoreGenerator.composables";
 
-const handleAction = () => console.log("action");
+const {
+  numberOfNotesSelected,
+  minOctaveSelected,
+  maxOctaveSelected,
+  selectedTempo,
+} = storeToRefs(useScoreStore());
 
-const numberOfNotesSelected = ref(25);
-
-const minOctaveSelected = ref(1);
-const maxOctaveSelected = ref(1);
-const selectedTempo = ref("largo");
-
+const { player } = useScoreGenerator();
+const handleAction = () => {
+  player();
+};
 watch(
   () => minOctaveSelected.value,
-  () => {
-    maxOctaveSelected.value = minOctaveSelected.value;
+  (newValue) => {
+    if (newValue >= maxOctaveSelected.value) {
+      maxOctaveSelected.value = minOctaveSelected.value;
+    }
   }
 );
 </script>
