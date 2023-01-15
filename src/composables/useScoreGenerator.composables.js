@@ -36,21 +36,20 @@ const useScoreGenerator = () => {
   });
 
   const timePlayer = () =>
-    new Promise((resolve) =>
+    new Promise((resolve) => {
       setTimeout(
         resolve,
         randomizeTime(
           1000 / getTempo.value.timeDivider,
           5000 / getTempo.value.timeDivider
         )
-      )
-    );
+      );
+    });
 
   const player = async () => {
     let count = 0;
+    setIsPlaying(true);
     while (count < numberOfNotesSelected.value) {
-      setIsPlaying(true);
-
       await timePlayer();
       setNote(randomNote());
       setOctave(randomOctave());

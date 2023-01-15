@@ -19,4 +19,12 @@ h1 {
   text-align: center;
   margin-top: 2.5em;
 }
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #64ff86;
+}
 </style>
