@@ -8,6 +8,7 @@ import { ref } from "vue";
 
 const title = ref("Note Libre");
 </script>
+
 <style scoped>
 h1 {
   text-shadow: 1px 1px 2px rgb(0, 221, 255), 0 0 1em rgb(6, 6, 6),
@@ -17,5 +18,13 @@ h1 {
   font-size: 7em;
   text-align: center;
   margin-top: 2.5em;
+}
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #64ff86;
 }
 </style>

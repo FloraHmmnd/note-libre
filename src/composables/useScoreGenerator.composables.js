@@ -1,4 +1,4 @@
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import { storeToRefs } from "pinia";
 
 import useScoreStore from "../store/score.store";
@@ -14,7 +14,7 @@ const useScoreGenerator = () => {
     selectedTempo,
   } = storeToRefs(useScoreStore());
 
-  const { setNote, setOctave } = useScoreStore();
+  const { setNote, setOctave, setIsPlaying } = useScoreStore();
 
   const randomNote = () => {
     return NOTES[Math.floor(Math.random() * NOTES.length)];
@@ -36,23 +36,27 @@ const useScoreGenerator = () => {
   });
 
   const timePlayer = () =>
-    new Promise((resolve) =>
+    new Promise((resolve) => {
       setTimeout(
         resolve,
         randomizeTime(
           1000 / getTempo.value.timeDivider,
           5000 / getTempo.value.timeDivider
         )
-      )
-    );
+      );
+    });
 
   const player = async () => {
     let count = 0;
+    setIsPlaying(true);
     while (count < numberOfNotesSelected.value) {
       await timePlayer();
       setNote(randomNote());
       setOctave(randomOctave());
       count++;
+    }
+    if (count === numberOfNotesSelected.value) {
+      setIsPlaying(false);
     }
   };
 
