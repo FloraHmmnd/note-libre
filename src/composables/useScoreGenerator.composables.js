@@ -12,9 +12,9 @@ const useScoreGenerator = () => {
     minOctaveSelected,
     maxOctaveSelected,
     selectedTempo,
-    note,
-    octave,
   } = storeToRefs(useScoreStore());
+
+  const { setNote, setOctave } = useScoreStore();
 
   const randomNote = () => {
     return NOTES[Math.floor(Math.random() * NOTES.length)];
@@ -35,11 +35,6 @@ const useScoreGenerator = () => {
     return TEMPOS.find((tempo) => tempo.name === selectedTempo.value);
   });
 
-  const setNote = () => {
-    note.value = randomNote();
-    octave.value = randomOctave();
-  };
-
   const timePlayer = () =>
     new Promise((resolve) =>
       setTimeout(
@@ -55,7 +50,8 @@ const useScoreGenerator = () => {
     let count = 0;
     while (count < numberOfNotesSelected.value) {
       await timePlayer();
-      setNote();
+      setNote(randomNote());
+      setOctave(randomOctave());
       count++;
     }
   };

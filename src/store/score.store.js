@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { normalizeStyle, ref } from "vue";
+import { ref } from "vue";
 
 export default defineStore("scoreStore", () => {
   const numberOfNotesSelected = ref(25);
