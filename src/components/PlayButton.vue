@@ -1,23 +1,16 @@
 <template>
-  <button>
-    <router-link to="/home">Note Libre</router-link>
-  </button>
-  <UserControls></UserControls>
-  <PlayButton v-if="!isPlaying"></PlayButton>
-  <Score></Score>
+  <h1><button @click="handleAction()">Play</button></h1>
 </template>
 
 <script setup>
-import useScoreStore from "../store/score.store";
-import { storeToRefs } from "pinia";
+import useScoreGenerator from "../composables/useScoreGenerator.composables";
 
-import UserControls from "../components/UserControls.vue";
-import Score from "../components/Score.vue";
-import PlayButton from "../components/PlayButton.vue";
+const { player } = useScoreGenerator();
 
-const { isPlaying } = storeToRefs(useScoreStore());
+const handleAction = () => {
+  player();
+};
 </script>
-
 <style scoped>
 h1 {
   text-shadow: 1px 1px 2px rgb(0, 221, 255), 0 0 1em rgb(6, 6, 6),
@@ -41,5 +34,9 @@ button {
   cursor: pointer;
   border: transparent;
   background-color: transparent;
+}
+
+button:hover {
+  color: #64ff86;
 }
 </style>

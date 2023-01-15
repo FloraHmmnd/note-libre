@@ -8,6 +8,7 @@ export default defineStore("scoreStore", () => {
   const selectedTempo = ref("largo");
   const note = ref(null);
   const octave = ref(null);
+  const isPlaying = ref(false);
 
   const setMinOctave = (minOctave) => {
     minOctaveSelected.value = minOctave;
@@ -24,6 +25,10 @@ export default defineStore("scoreStore", () => {
   const setOctave = (newOctave) => {
     octave.value = newOctave;
   };
+
+  const setIsPlaying = (state) => {
+    isPlaying.value = state;
+  };
   return {
     numberOfNotesSelected,
     minOctaveSelected,
@@ -35,5 +40,7 @@ export default defineStore("scoreStore", () => {
     setMaxOctave,
     setNote,
     setOctave,
+    isPlaying,
+    setIsPlaying,
   };
 });

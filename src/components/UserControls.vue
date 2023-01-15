@@ -27,7 +27,6 @@
       @drag-end="setOctavesValues()"
     ></VueSlider>
   </div>
-  <button @click="handleAction()">GO</button>
 </template>
 
 <script setup>
@@ -36,7 +35,6 @@ import { storeToRefs } from "pinia";
 
 import useScoreStore from "../store/score.store";
 import { TEMPOS } from "../constants/tempos.constants";
-import useScoreGenerator from "../composables/useScoreGenerator.composables";
 
 import VueSlider from "vue-slider-component";
 import "vue-slider-component/theme/default.css";
@@ -49,9 +47,5 @@ const octaveValue = ref([1, 8]);
 const setOctavesValues = () => {
   setMinOctave(octaveValue.value[0]);
   setMaxOctave(octaveValue.value[1]);
-};
-const { player } = useScoreGenerator();
-const handleAction = () => {
-  player();
 };
 </script>
