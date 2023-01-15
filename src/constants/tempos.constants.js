@@ -1,4 +1,4 @@
-export const TEMPO = [
+export const TEMPOS = [
   {
     id: 1,
     name: "largo",

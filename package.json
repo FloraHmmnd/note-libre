@@ -11,8 +11,10 @@
     "format": "prettier .  --write"
   },
   "dependencies": {
+    "pinia": "^2.0.28",
     "vue": "^3.2.45",
-    "vue-router": "4"
+    "vue-router": "4",
+    "vue-slider-component": "^4.1.0-beta.7"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
